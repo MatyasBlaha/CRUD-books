@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
 import { FetchBooksRequest } from '../../services/FetchBooks/FetchBooksRequest'
-import {useEffect} from "react";
+
+import axios from "axios";
 
 const Home = () => {
 
@@ -18,6 +20,14 @@ const Home = () => {
         fetchBooks()
     }, [])
 
+    const handleClick = async (id) => {
+        try{
+            await axios.delete('http://localhost:3001/books/'+id)
+            window.location.reload()
+        }catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <div>
@@ -27,6 +37,8 @@ const Home = () => {
                     <p>{book.description}</p>
                     <img src={book.cover} alt={book.title} />
                     <p>{book.price}</p>
+                    <button onClick={()=>handleClick(book.id)}>Delete</button>
+                    <button><Link to={`/edit-books/${book.id}`}>Edit</Link></button>
                 </div>
             ))}
         </div>

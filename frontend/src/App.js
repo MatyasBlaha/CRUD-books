@@ -13,7 +13,7 @@ function App() {
         <Navbar/>
       <Routes>
         <Route exact path="/" element={<Home/>}></Route>
-          <Route exact path="/edit-books" element={<EditBooks/>}></Route>
+          <Route exact path="/edit-books/:id" element={<EditBooks/>}></Route>
           <Route exact path="/add-books" element={<AddBooks/>}></Route>
       </Routes>
     </div>
